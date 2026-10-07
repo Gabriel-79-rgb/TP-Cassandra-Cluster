@@ -76,3 +76,11 @@ manquée et l'ont rejouée sur `cass3`.
 - 100 films seulement, issus de 5 mots-clés.
 - `count(*)` sans clé de partition génère un avertissement : acceptable
   uniquement sur un petit volume.
+## Captures
+
+![nodetool status](../captures/C1_nodetool_3_noeuds.png)
+![Import](../captures/C2_import_100_films.png)
+![getendpoints](../captures/C3_getendpoints.png)
+![Consistency](../captures/C4_consistency.png)
+![Panne](../captures/C5_panne_cass3.png)
+![Redémarrage](../captures/C6_cass3_redemarre.png)

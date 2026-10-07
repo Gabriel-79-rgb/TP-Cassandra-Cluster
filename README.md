@@ -57,3 +57,22 @@ queries/       10_cluster_schema, 11_consistency, 12_panne
 documentation/ cluster.md
 captures/      captures d'écran
 ```
+## Captures
+
+### Cluster de 3 nœuds
+![nodetool status](captures/C1_nodetool_3_noeuds.png)
+
+### Import des 100 films (RF = 3)
+![Import](captures/C2_import_100_films.png)
+
+### Réplication (getendpoints)
+![getendpoints](captures/C3_getendpoints.png)
+
+### Niveaux de cohérence
+![Consistency](captures/C4_consistency.png)
+
+### Panne de cass3
+![Panne](captures/C5_panne_cass3.png)
+
+### Redémarrage de cass3
+![Redémarrage](captures/C6_cass3_redemarre.png)
