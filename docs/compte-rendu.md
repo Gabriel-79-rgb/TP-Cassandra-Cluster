@@ -16,7 +16,7 @@ Les nœuds ont été démarrés progressivement : `cass1` et `cass2`, puis `cass
 une fois les deux premiers en état `UN`. Seul `cass1` expose le port 9042 vers
 la machine hôte.
 
-![nodetool status](../captures/C1_nodetool_3_noeuds.png)
+![nodetool status](../captures/cr_01_status_3_noeuds.png)
 
 ### Question 1 : état après le démarrage des trois nœuds
 
@@ -89,6 +89,16 @@ sur 3 nœuds différents. Avec 3 nœuds, chaque film est donc présent sur
 Le partitionnement décide *où va* une donnée, la réplication décide *combien
 de copies* existent.
 
+## 5. Distribution
+
+`nodetool describecluster` et `nodetool ring` montrent le cluster, ses 3 nœuds
+et leurs tokens : chaque nœud possède 16 tokens répartis sur l'anneau,
+mélangés entre `rack1`, `rack2` et `rack3`.
+
+![describecluster](../captures/cr_02a_describecluster.png)
+
+![ring](../captures/cr_02b_ring.png)
+
 ### Question 5 : chemin d'une donnée
 
 Exemple avec le film `tt0372784` (*Batman Begins*) :
@@ -114,14 +124,14 @@ la donnée.
 
 `nodetool getendpoints` confirme que le film est stocké sur les trois nœuds.
 
-![token et getendpoints](../captures/C8_token_getendpoints.png)
+![token et getendpoints](../captures/cr_03_token_endpoints.png)
 
 ## 6. Niveaux de cohérence (3 nœuds actifs)
 
 Lecture du film `tt0372784` en `ONE`, `QUORUM` et `ALL` : les trois réussissent
 (`Batman Begins`, 2005).
 
-![lectures avec 3 nœuds](../captures/C9_lectures_3_noeuds.png)
+![lectures avec 3 nœuds](../captures/cr_04_lectures_3_noeuds.png)
 
 ### Question 6 : comparaison
 
@@ -141,7 +151,7 @@ docker stop cass3
 docker exec cass1 nodetool status
 ```
 
-![panne cass3](../captures/C7_panne_nodetool_status.png)
+![cass3 en panne](../captures/cr_05_panne_status.png)
 
 ### Question 7
 
@@ -159,7 +169,7 @@ que le nœud doit posséder, pas ce qu'il peut servir.
 | QUORUM | succès |
 | ALL | échec : `Cannot achieve consistency level ALL` (`required_replicas: 3`, `alive_replicas: 2`) |
 
-![lectures pendant la panne](../captures/C10_lectures_panne.png)
+![lectures pendant la panne](../captures/cr_06_lectures_panne.png)
 
 ### Question 8
 
@@ -182,7 +192,7 @@ docker start cass3
 docker exec cass1 nodetool status
 ```
 
-![retour de cass3](../captures/C11_cass3_retour.png)
+![retour de cass3](../captures/cr_07_retour_status.png)
 
 ### Question 9
 
@@ -199,7 +209,7 @@ que `cass3` est de nouveau complètement intégré.
 Dans le TP précédent, le film `tt9999999`, écrit pendant la panne, a aussi été
 retrouvé en lisant directement sur `cass3` en `ONE`.
 
-![vérification finale](../captures/C12_verification_finale.png)
+![vérification finale](../captures/cr_08_verification_finale.png)
 
 ### Question 10
 
